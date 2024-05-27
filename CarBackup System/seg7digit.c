@@ -1,22 +1,11 @@
-/*
- * seg7.c: Starter code for the digital interface for the 4-digit 7-segment display.
- *
- * Created by Zhao Zhang for ECE 266 labs, spring 2022.
- *
- * Note: It is revised from the 7-segment code from previous semesters.
- */
+
 
 #include <stdint.h>
 #include <stdbool.h>
 #include "seg7.h"
 
 /*
- * 7-segment coding table. See https://en.wikipedia.org/wiki/Seven-segment_display. The segments
- * are named as A, B, C, D, E, F, G. In this coding table, segments A-G are mapped to bits 0-7.
- * Bit 7 is not used in the coding. This display uses active high signal, in which '1' turns ON a
- * segment, and '0' turns OFF a segment.
- *
- * Note: The table is incomplete. Fill the codes for digits 4-9.
+ * 7-segment coding table
  */
 static uint8_t seg7_coding_table[11] = {
         0b00111111,         // digit 0
