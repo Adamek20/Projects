@@ -1,13 +1,3 @@
-/*
- * lab8_main.c: Starter code for ECE 266 Lab 8, main.c, spring 2024
- * Note: In this semester, a small part of starter code is provided
- * (none was provided before).
- *
- * Lab 8: Distance Measurement
- *
- * Created by Zhao Zhang
- * Last update: 3/14/2024
- */
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -41,21 +31,11 @@ SysState sys =
 
 
 // The events
-
 Event trigger_ranger_reading_event;
 Event check_ranger_event;
 Event led_event;
 Event buzzer_play_event;
 
-
-
-
-
-/*******************************************
- * Task 1: Trigger and read the ranger
- ******************************************/
-
-// Trigger the ranger reading every 0.5 seconds
 
 void FlashLED(Event *event)
 {
@@ -69,7 +49,7 @@ void FlashLED(Event *event)
     else
     {
         delay= (1000.0 * (mili/921.0));
-             // see ledTurnOnOff() in launchpad.h
+            
 
     }
 
@@ -120,14 +100,14 @@ void BuzzerPlay(Event *event)                   // the scheduled time
                 // The buzzer is on: turn it off
                MusicTurnOffBuzzer();
                 sys.buzzer_on = false;
-                                   // off for 2988 ms
+                                  
             }
             else
             {
                 // The buzzer is off: turn it on
                 MusicSetBuzzer(1000, volume);
                 sys.buzzer_on = true;
-                                        // on for 12 ms
+                                     
             }
 
 
@@ -229,7 +209,6 @@ void main(void)
     Seg7Init();
     RangerInit();
     BuzzerInit();
-    //memcpy (&buzzer_play_event,&check_ranger_event, sizeof(check_ranger_event) );
 
     // Initialize the events
     EventInit(&trigger_ranger_reading_event, TriggerRangerReading);
