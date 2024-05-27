@@ -1,8 +1,3 @@
-/*
- * seg7digit.h
- *
- * Created by Zhao Zhang for ECE 266, Fall 2019
- */
 
 #include <stdint.h>
 #include <stdbool.h>
