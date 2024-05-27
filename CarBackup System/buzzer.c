@@ -1,10 +1,5 @@
 /******************************************************************************
- * Lab 4 starter code
- * ECE 266, spring 2024
- *
  * buzzer.c: This file contains the initialization function for the buzzer.
- *
- * Created by Zhao Zhang
  *****************************************************************************/
 
 #include "buzzer.h"
@@ -15,7 +10,7 @@
  *****************************************************************************/
 void BuzzerInit()
 {
-    // Enable Timer 0 and Timer 1
+    // Enable Timer 0
     SysCtlPeripheralEnable(SYSCTL_PERIPH_WTIMER0);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
 
@@ -33,9 +28,8 @@ void BuzzerInit()
     // The inversion is done by enabling output inversion on the PWM pins.
     TimerControlLevel(WTIMER0_BASE, TIMER_B, true /* output inversion */);
 
-    // Enable the Timer 0's TimerB and Timer 1's TimerA and TimerB
+    // Enable the Timer 0's TimerB 
     TimerEnable(WTIMER0_BASE, TIMER_B);
-    //TimerEnable(TIMER1_BASE, TIMER_A | TIMER_B);
 }
 void MusicSetBuzzer(int pitch, int tone)
 {
@@ -48,9 +42,6 @@ void MusicTurnOffBuzzer()
     PwmBuzzerSet(1000,0);
 }
 
-/*
- * Set color of the on-board LED by setting the intensity of the three primary colors
- */
 void PwmBuzzerSet(int PWMfreq, int PWMdCycle)
 {
     // Set the PWM parameters for red LED
