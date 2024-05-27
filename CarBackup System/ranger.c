@@ -1,22 +1,6 @@
-/*
- * range.c: Starter code for ECE 266 Lab 8, main.c, spring 2024
- *
- * Lab 8: Distance Measurement
- *
- * YOU NEED TO REVISE THE CODE IN PART 2 AND PART 3.
- *
- * Created by Zhao Zhang
- * Last update: 3/14/2024
- */
-
 #include "ranger.h"
 
-/*
- * Hardware configure: The ultrasonic ranger (and its signal pin) shall be connected to:
- *      Grove baseboard: Port J6, Pin 24
- *      Tiva C: GPIO PD1
- *      Timer pin: WT2CCP1
- */
+
 
 /*
  * Global/static variables and declarations
@@ -39,11 +23,6 @@ volatile RangerState ranger;
 
 void RangerISR();
 
-/*
- * Initialize the ranger. It should be connected to Grove jumper J13 (SIG connected to
- * pin 40). The GPIO pin is PF2, and the time pin is T1CCP0. The timer is TIMER1 and the
- * sub-Time is A.
- */
 void RangerInit()
 {
     // Initial ranger state in memory
@@ -55,7 +34,6 @@ void RangerInit()
     SysCtlPeripheralEnable(SYSCTL_PERIPH_WTIMER2);
 
     // Configure PD2 as timer pin and connect it to WT2CCP1
-    // Do NOT enable the time as this time
     GPIOPinTypeTimer(GPIO_PORTD_BASE, GPIO_PIN_1);
     GPIOPinConfigure(GPIO_PD1_WT2CCP1);
 
@@ -78,7 +56,7 @@ void RangerTriggerReading()
     ranger.new_data_ready = false;
     ranger.state = EXPECT_START_EVENT_1;
 
-    // It is safe to disable a peripheral during configuration
+    // disable a peripheral during configuration
     TimerDisable(WTIMER2_BASE, TIMER_B);
 
     // Configure WT2CCP1 for PWM to generate a pulse of 5 microseconds, with
@@ -117,8 +95,6 @@ void RangerEventRegister(Event *event)
  * 2. Expecting the falling edge of the start pulse
  * 3. Expecting the rising edge of the data pulse
  * 4. Expecting the falling edge of the data pulse
- *
- * You ISR needs to process each event approximately.
  */
 void RangerISR()
 {
