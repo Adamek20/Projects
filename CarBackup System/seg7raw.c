@@ -1,14 +1,6 @@
 /*
  * seg7.c: Communication functions with the TiM1637 chip used with the Groove 4-digit 7-segment display.
  *
- * Created by Zhao Zhang for ECE 367 labs at UIC, fall 2016.
- *
- * TiM1637 uses an I2C-like protocol, but it is not I2C-compatible. See the data sheet of TiM1637 for the
- * required timing.  It uses the same signal forms for the START, STOP and data bits of I2C, the data byte format
- * is similar, but it does not follow the packet format (address byte followed by data bytes) of I2C.
- *
- * It seems that the only practical way is to use bit-banging, as did in this program file. Note that bit-banging
- * is not CPU-efficient and should be avoided whenever possible.
  */
 
 #include <stdint.h>
@@ -42,8 +34,8 @@
 void
 Seg7Init()
 {
-	// Enable GPIO Port B as peripheral.
-	SysCtlPeripheralEnable(PORT_PERIPH);
+    // Enable GPIO Port B as peripheral.
+    SysCtlPeripheralEnable(PORT_PERIPH);
 
     // Set the pads for standard push-pull operation, with 8ma strength
     GPIOPadConfigSet(PORT, CLK | DIO, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_OD);
